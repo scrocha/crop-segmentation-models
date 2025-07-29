@@ -28,10 +28,19 @@ def segmentar_patches_via_hf_id():
 
         mask_generator = SAM2AutomaticMaskGenerator(
             model=sam2_model,
-            points_per_side=32,
+            points_per_side=64,
+            points_per_batch=128,
             pred_iou_thresh=0.80,
             stability_score_thresh=0.90,
-            min_mask_region_area=150000,
+            stability_score_offset=1.0,
+            mask_threshold=0.0,
+            box_nms_thresh=0.6,
+            crop_n_layers=1,
+            crop_nms_thresh=0.6,
+            crop_overlap_ratio= 128 / 1024,  # 128 pixels de sobreposição em um patch de 1024 pixels
+            crop_n_points_downscale_factor=2,
+            min_mask_region_area=150000,  # 150k pixels
+            use_m2m=True,
         )
 
     except Exception as e:
