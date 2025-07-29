@@ -4,6 +4,7 @@ from rasterio.mask import mask
 import numpy as np
 import os
 from tqdm import tqdm
+import zipfile
 import argparse
 
 CLASSES_MAPBIOMAS_AGRICULTURA = [
@@ -109,7 +110,7 @@ def filtrar_mascaras(
 def main():
     INPUT_SHP = "./dados/campo_verde_mascaras.shp"
     OUTPUT_SHP_FILTRADO = "./dados/campo_verde_mascaras_filtradas.shp"
-    MAPBIOMAS_RASTER = "./dados/mapbiomas_10m_collection2_integration_v1-classification_2022.tif"
+    MAPBIOMAS_RASTER = "./dados/mapbiomas_campo_verde.tif"
 
     AREA_MIN_HA = 15.0  # Área mínima de um talhão (ex: 15 hectares)
     AREA_MAX_HA = 200.0  # Área máxima de um talhão (ex: 200 hectares)
@@ -125,6 +126,19 @@ def main():
         area_max_ha=AREA_MAX_HA,
         agri_pct_min=AGRI_PCT_MIN,
     )
+
+    name = OUTPUT_SHP_FILTRADO[:-4]
+
+    for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
+        file_path = f"{OUTPUT_SHP_FILTRADO[:-4]}{ext}"
+        if not os.path.exists(file_path):
+            print(f"⚠️ Arquivo {file_path} não encontrado para zipar.")
+            return
+
+    with zipfile.ZipFile(f"{name}.zip", 'w') as zipf:
+        for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
+            file_path = f"{OUTPUT_SHP_FILTRADO[:-4]}{ext}"
+            zipf.write(file_path, arcname=os.path.basename(file_path))
 
 
 if __name__ == "__main__":
