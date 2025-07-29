@@ -5,6 +5,7 @@ from rasterio.features import shapes
 import rasterio
 import os
 import glob
+import zipfile
 from tqdm import tqdm
 from pathlib import Path
 
@@ -114,6 +115,21 @@ def converter_npz_para_shp():
     print(f"📐 Área média: {gdf['area_ha'].mean():.2f} hectares")
     print(f"💾 Shapefile salvo: {OUTPUT_SHP}")
 
+def zip_files():
+    name = OUTPUT_SHP[:-4]
+
+    for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
+        file_path = f"{OUTPUT_SHP[:-4]}{ext}"
+        if not os.path.exists(file_path):
+            print(f"⚠️ Arquivo {file_path} não encontrado para zipar.")
+            return
+
+    with zipfile.ZipFile(f"{name}.zip", 'w') as zipf:
+        for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
+            file_path = f"{OUTPUT_SHP[:-4]}{ext}"
+            zipf.write(file_path, arcname=os.path.basename(file_path))
 
 if __name__ == "__main__":
     converter_npz_para_shp()
+    zip_files()
+    
