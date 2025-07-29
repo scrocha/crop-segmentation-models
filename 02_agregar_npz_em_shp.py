@@ -115,6 +115,7 @@ def converter_npz_para_shp():
     print(f"📐 Área média: {gdf['area_ha'].mean():.2f} hectares")
     print(f"💾 Shapefile salvo: {OUTPUT_SHP}")
 
+
 def zip_files():
     name = OUTPUT_SHP[:-4]
 
@@ -129,7 +130,7 @@ def zip_files():
             file_path = f"{OUTPUT_SHP[:-4]}{ext}"
             zipf.write(file_path, arcname=os.path.basename(file_path))
 
+
 if __name__ == "__main__":
     converter_npz_para_shp()
     zip_files()
-    

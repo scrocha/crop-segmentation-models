@@ -37,7 +37,8 @@ def segmentar_patches_via_hf_id():
             box_nms_thresh=0.6,
             crop_n_layers=1,
             crop_nms_thresh=0.6,
-            crop_overlap_ratio= 128 / 1024,  # 128 pixels de sobreposição em um patch de 1024 pixels
+            crop_overlap_ratio=128
+            / 1024,  # 128 pixels de sobreposição em um patch de 1024 pixels
             crop_n_points_downscale_factor=2,
             min_mask_region_area=150000,  # 150k pixels
             use_m2m=True,
@@ -54,12 +55,13 @@ def segmentar_patches_via_hf_id():
 
     print(f"Encontrados {len(image_paths)} patches para processar.")
 
-    for image_path in tqdm(
-        image_paths, desc="Segmentando patches"
-    ):
+    for image_path in tqdm(image_paths, desc="Segmentando patches"):
         base_name = os.path.basename(image_path)
         output_filename = f"{os.path.splitext(base_name)[0]}_masks.npz"
         output_path = os.path.join(OUTPUT_DIR, output_filename)
+
+        if os.path.exists(output_path):
+            continue
 
         try:
             with rasterio.open(image_path) as src:
