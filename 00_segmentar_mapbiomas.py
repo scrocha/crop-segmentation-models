@@ -81,7 +81,10 @@ def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
             gdf = gpd.GeoDataFrame.from_features(geoms, crs=src.crs)
 
             gdf['classe'] = group_name
-            gdf['area_ha'] = gdf.geometry.area / 10000
+
+            gdf['pixels'] = np.sum(mascara_binaria)
+            gdf['area_m2'] = gdf['pixels'] * 100
+            gdf['area_ha'] = gdf['area_m2'] / 10000
 
             output_path = os.path.join(
                 output_dir, f"mapbiomas_{group_name}.shp"
@@ -104,6 +107,7 @@ def main():
         )
 
     print("\nProcessamento concluído!")
+
 
 if __name__ == "__main__":
     main()
