@@ -11,13 +11,37 @@ RASTER_MAPBIOMAS = "./dados/mapbiomas_campo_verde.tif"
 OUTPUT_DIR = "./dados/mapbiomas_vetorizado"
 
 GRUPOS_MAPBIOMAS = {
-    "agricultura": [18, 19, 39, 20, 40, 62, 41, 36, 46, 47, 35, 48],
-    "pastagem": [15],
-    "floresta": [1, 3, 4, 5, 6, 49],
-    "silvicultura": [9],
-    "area_urbanizada": [24],
-    "corpos_dagua": [26, 33, 31],
+    "agricultura_temporaria": [
+        19,
+        20,
+        39,
+        40,
+        41,
+        62,
+    ],  # lavoura temporária e suas subclasses
+    "agricultura_perene": [
+        36,
+        35,
+        46,
+        47,
+        48,
+    ],  # lavoura perene e suas subclasses
+    "pastagem": [15],  # pastagem
+    "silvicultura": [9],  # silvicultura
+    "floresta": [1, 3, 4, 5, 6, 49],  # floresta e subclasses
+    "vegetacao": [10, 11, 12, 32, 29, 50],  # vegetação herbácea e arbustiva
+    "area_urbanizada": [24],  # área urbana
+    "area_nao_vegetada": [
+        22,
+        23,
+        25,
+        30,
+    ],  # áreas não vegetadas (praias, mineração etc.)
+    "mosaico_usos": [21],  # mosaico de usos
+    "corpos_dagua": [26, 31, 33],  # rios, lagos, aquicultura
+    "nao_observado": [27],  # não observado
 }
+
 
 def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
     print(f"\n🔄 Processando grupo: {group_name}")
