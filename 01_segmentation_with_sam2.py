@@ -12,7 +12,7 @@ from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
 MODEL_ID = "facebook/sam2.1-hiera-base-plus"
 
 INPUT_DIR = "./dados/patches_campo_verde"
-OUTPUT_DIR = "./dados/mascaras_campo_verde"
+OUTPUT_DIR = "./dados/mascaras_campo_verde_sam2"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

@@ -108,8 +108,8 @@ def filtrar_mascaras(
 
 
 def main():
-    INPUT_SHP = "./dados/campo_verde_mascaras.shp"
-    OUTPUT_SHP_FILTRADO = "./dados/campo_verde_mascaras_filtradas.shp"
+    INPUT_SHP = "./dados/sam2/campo_verde_mascaras.shp"
+    OUTPUT_SHP_FILTRADO = "./dados/sam2/campo_verde_mascaras_filtradas.shp"
     MAPBIOMAS_RASTER = "./dados/mapbiomas_campo_verde.tif"
 
     AREA_MIN_HA = 15.0  # Área mínima de um talhão (ex: 15 hectares)

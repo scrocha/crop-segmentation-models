@@ -6,9 +6,9 @@ import os
 from tqdm import tqdm
 import zipfile
 
-INPUT_SHP = "./dados/campo_verde_mascaras_filtradas.shp"
+INPUT_SHP = "./dados/sam2/campo_verde_mascaras_filtradas.shp"
 IMAGEM_RASTER = "./dados/campo_verde_merged_clip.tif"
-OUTPUT_SHP = "./dados/campo_verde_talhoes_com_heterogeneidade.shp"
+OUTPUT_SHP = "./dados/sam2/campo_verde_talhoes_com_heterogeneidade.shp"
 
 BANDA_VERMELHO = 3
 BANDA_NIR = 1

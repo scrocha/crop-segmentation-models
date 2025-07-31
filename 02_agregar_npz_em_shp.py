@@ -9,9 +9,9 @@ import zipfile
 from tqdm import tqdm
 from pathlib import Path
 
-MASKS_DIR = "./dados/mascaras_campo_verde"
+MASKS_DIR = "./dados/mascaras_campo_verde_sam2"
 PATCHES_DIR = "./dados/patches_campo_verde"
-OUTPUT_SHP = "./dados/campo_verde_mascaras.shp"
+OUTPUT_SHP = "./dados/sam2/campo_verde_mascaras.shp"
 AREA_MIN = 100  # metros quadrados
 
 

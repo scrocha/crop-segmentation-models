@@ -107,7 +107,7 @@ def calcular_metricas_segmentacao(
 
 def main():
     AOI_SHP = "./dados/campo_verde.geojson"
-    FILTERED_SHP = "./dados/campo_verde_mascaras_filtradas.shp"
+    FILTERED_SHP = "./dados/sam2/campo_verde_mascaras_filtradas.shp"
     MAPBIOMAS_RASTER = "./dados/mapbiomas_campo_verde.tif"
 
     print("Iniciando análise de cobertura da segmentação...")
