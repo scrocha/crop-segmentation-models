@@ -44,7 +44,7 @@ GRUPOS_MAPBIOMAS = {
 
 
 def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
-    print(f"\n🔄 Processando grupo: {group_name}")
+    print(f"\Processando grupo: {group_name}")
 
     try:
         with rasterio.open(raster_path) as src:
@@ -56,7 +56,7 @@ def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
 
             if np.sum(mascara_binaria) == 0:
                 print(
-                    f"   - ⚠️ Nenhuma área encontrada para o grupo '{group_name}'. Pulando."
+                    f"   - Nenhuma área encontrada para o grupo '{group_name}'. Pulando."
                 )
                 return
 
@@ -74,7 +74,7 @@ def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
             geoms = list(results)
             if not geoms:
                 print(
-                    f"   - ⚠️ Não foi possível gerar polígonos para o grupo '{group_name}'."
+                    f"   - Não foi possível gerar polígonos para o grupo '{group_name}'."
                 )
                 return
 
@@ -91,11 +91,11 @@ def vetorizar_classes(raster_path, class_ids, group_name, output_dir):
             )
             gdf.to_file(output_path)
 
-            print(f"   - ✅ Shapefile salvo em: {output_path}")
+            print(f"   - Shapefile salvo em: {output_path}")
             print(f"   - Polígonos gerados: {len(gdf)}")
 
     except Exception as e:
-        print(f"   - ❌ Erro ao processar o grupo '{group_name}': {e}")
+        print(f"   - Erro ao processar o grupo '{group_name}': {e}")
 
 
 def main():

@@ -53,7 +53,7 @@ def calcular_ndvi_stats(geometry, raster_path):
 def main():
     if not os.path.exists(INPUT_SHP) or not os.path.exists(IMAGEM_RASTER):
         print(
-            "❌ ERRO: Arquivo de entrada (SHP ou TIF) não encontrado. Verifique os caminhos."
+            "Arquivo de entrada (SHP ou TIF) não encontrado. Verifique os caminhos."
         )
         return
 
@@ -64,7 +64,7 @@ def main():
             gdf = gdf.to_crs(src.crs)
 
     print(
-        f"🚀 Processando {len(gdf)} talhões para calcular estatísticas NDVI..."
+        f"Processando {len(gdf)} talhões para calcular estatísticas NDVI..."
     )
     stats_list = [
         calcular_ndvi_stats(row.geometry, IMAGEM_RASTER)
@@ -78,16 +78,16 @@ def main():
 
     valores_validos = gdf['ndvi_mean'].notna().sum()
     print(
-        f"\n✅ Análise concluída. {valores_validos} de {len(gdf)} talhões processados com sucesso."
+        f"\nAnálise concluída. {valores_validos} de {len(gdf)} talhões processados com sucesso."
     )
 
     if valores_validos == 0:
-        print("⚠️ Nenhum talhão produziu estatísticas válidas.")
+        print("Nenhum talhão produziu estatísticas válidas.")
         return
 
     gdf.dropna(subset=['ndvi_mean'], inplace=True)
 
-    print("\n📊 Resumo das Estatísticas NDVI Calculadas:")
+    print("\nResumo das Estatísticas NDVI Calculadas:")
     colunas_stats = [
         'ndvi_mean',
         'ndvi_std',
@@ -99,13 +99,13 @@ def main():
 
     gdf.to_file(OUTPUT_SHP)
     print(
-        f"\n💾 Shapefile com análise de heterogeneidade salvo em: {OUTPUT_SHP}"
+        f"\nShapefile com análise de heterogeneidade salvo em: {OUTPUT_SHP}"
     )
 
     for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
         file_path = f"{OUTPUT_SHP[:-4]}{ext}"
         if not os.path.exists(file_path):
-            print(f"⚠️ Arquivo {file_path} não encontrado para zipar.")
+            print(f"Arquivo {file_path} não encontrado para zipar.")
             return
 
     with zipfile.ZipFile(f"{OUTPUT_SHP[:-4]}.zip", 'w') as zipf:

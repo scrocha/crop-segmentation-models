@@ -25,7 +25,7 @@ def segmentar_patches_com_pipeline():
         )
 
     except Exception as e:
-        print(f"❌ Erro ao carregar a pipeline: {e}")
+        print(f"Erro ao carregar a pipeline: {e}")
         return
 
     image_paths = glob.glob(os.path.join(INPUT_DIR, "*.tif"))
@@ -72,7 +72,7 @@ def segmentar_patches_com_pipeline():
             np.savez_compressed(output_path, masks=masks_final)
 
         except Exception as e:
-            print(f"\n❌ Erro ao processar o arquivo {base_name}: {e}")
+            print(f"\nErro ao processar o arquivo {base_name}: {e}")
             continue
 
     print("\nProcessamento concluído!")

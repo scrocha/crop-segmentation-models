@@ -45,7 +45,7 @@ def segmentar_patches_via_hf_id():
         )
 
     except Exception as e:
-        print(f"❌ Erro ao carregar ou configurar o modelo: {e}")
+        print(f"Erro ao carregar ou configurar o modelo: {e}")
         return
 
     image_paths = glob.glob(os.path.join(INPUT_DIR, "*.tif"))
@@ -79,7 +79,7 @@ def segmentar_patches_via_hf_id():
             np.savez_compressed(output_path, masks=stacked_masks)
 
         except Exception as e:
-            print(f"\n❌ Erro ao processar o arquivo {base_name}: {e}")
+            print(f"\nErro ao processar o arquivo {base_name}: {e}")
             continue
 
     print("\nProcessamento concluído!")

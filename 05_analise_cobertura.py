@@ -115,7 +115,7 @@ def main():
     area_total_ha = calcular_area_agricola_total(AOI_SHP, MAPBIOMAS_RASTER)
     if area_total_ha == 0:
         print(
-            "❌ ERRO CRÍTICO: Área agrícola de referência na AOI é zero. Verifique a sobreposição dos seus arquivos."
+            "ERRO CRÍTICO: Área agrícola de referência na AOI é zero. Verifique a sobreposição dos seus arquivos."
         )
         return
 
@@ -124,7 +124,7 @@ def main():
     )
 
     print("\n" + "=" * 60)
-    print("📊 RELATÓRIO DE DESEMPENHO DA SEGMENTAÇÃO")
+    print("RELATÓRIO DE DESEMPENHO DA SEGMENTAÇÃO")
     print("=" * 60)
     print(f"Área Agrícola de Referência (na AOI): {area_total_ha:.2f} ha")
     print("-" * 60)

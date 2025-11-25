@@ -48,7 +48,7 @@ def get_agriculture_coverage(geometry, mapbiomas_raster):
 
     except Exception as e:
         if "Input shapes do not overlap raster" not in str(e):
-            print(f"\n⚠️  Aviso ao processar geometria: {e}")
+            print(f"\nAviso ao processar geometria: {e}")
         return 0.0
 
 
@@ -62,14 +62,14 @@ def filtrar_mascaras(
 ):
     if not os.path.exists(input_shp):
         raise FileNotFoundError(
-            f"❌ Shapefile de entrada não encontrado: {input_shp}"
+            f"Shapefile de entrada não encontrado: {input_shp}"
         )
     if not os.path.exists(mapbiomas_raster):
         raise FileNotFoundError(
-            f"❌ Raster MapBiomas não encontrado: {mapbiomas_raster}"
+            f"Raster MapBiomas não encontrado: {mapbiomas_raster}"
         )
 
-    print("🔄 Iniciando filtragem de máscaras...")
+    print("Iniciando filtragem de máscaras...")
     gdf = gpd.read_file(input_shp)
     initial_count = len(gdf)
     print(f"   - Polígonos iniciais: {initial_count}")
@@ -132,7 +132,7 @@ def main():
     for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
         file_path = f"{OUTPUT_SHP_FILTRADO[:-4]}{ext}"
         if not os.path.exists(file_path):
-            print(f"⚠️ Arquivo {file_path} não encontrado para zipar.")
+            print(f"Arquivo {file_path} não encontrado para zipar.")
             return
 
     with zipfile.ZipFile(f"{name}.zip", 'w') as zipf:

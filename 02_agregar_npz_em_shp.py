@@ -17,19 +17,19 @@ AREA_MIN = 100  # metros quadrados
 
 def converter_npz_para_shp():
     if not os.path.exists(MASKS_DIR):
-        print(f"❌ Diretório de máscaras não encontrado: {MASKS_DIR}")
+        print(f"Diretório de máscaras não encontrado: {MASKS_DIR}")
         return
 
     if not os.path.exists(PATCHES_DIR):
-        print(f"❌ Diretório de patches não encontrado: {PATCHES_DIR}")
+        print(f"Diretório de patches não encontrado: {PATCHES_DIR}")
         return
 
     npz_files = glob.glob(os.path.join(MASKS_DIR, "*.npz"))
     if not npz_files:
-        print(f"❌ Nenhum arquivo NPZ encontrado em {MASKS_DIR}")
+        print(f"Nenhum arquivo NPZ encontrado em {MASKS_DIR}")
         return
 
-    print(f"📊 Encontrados {len(npz_files)} arquivos NPZ para processar")
+    print(f"Encontrados {len(npz_files)} arquivos NPZ para processar")
 
     todas_geometrias = []
     crs_final = None
@@ -45,7 +45,7 @@ def converter_npz_para_shp():
             patch_path = os.path.join(PATCHES_DIR, f"{patch_name}.tif")
 
             if not os.path.exists(patch_path):
-                print(f"⚠️ Patch não encontrado: {patch_path}")
+                print(f"Patch não encontrado: {patch_path}")
                 continue
 
             with rasterio.open(patch_path) as src:
@@ -88,14 +88,14 @@ def converter_npz_para_shp():
                             continue
 
         except Exception as e:
-            print(f"❌ Erro ao processar {npz_path}: {e}")
+            print(f"Erro ao processar {npz_path}: {e}")
             continue
 
     if not todas_geometrias:
-        print("⚠️ Nenhuma geometria válida foi gerada!")
+        print("Nenhuma geometria válida foi gerada!")
         return
 
-    print(f"✅ Total de polígonos gerados: {len(todas_geometrias)}")
+    print(f"Total de polígonos gerados: {len(todas_geometrias)}")
 
     geometries = [g['geometry'] for g in todas_geometrias]
     attributes = {
@@ -110,11 +110,10 @@ def converter_npz_para_shp():
 
     gdf.to_file(OUTPUT_SHP)
 
-    print(f"📊 Polígonos salvos: {len(gdf)}")
-    print(f"📐 Área total: {gdf['area_ha'].sum():.2f} hectares")
-    print(f"📐 Área média: {gdf['area_ha'].mean():.2f} hectares")
-    print(f"💾 Shapefile salvo: {OUTPUT_SHP}")
-
+    print(f"Polígonos salvos: {len(gdf)}")
+    print(f"Área total: {gdf['area_ha'].sum():.2f} hectares")
+    print(f"Área média: {gdf['area_ha'].mean():.2f} hectares")
+    print(f"Shapefile salvo: {OUTPUT_SHP}")
 
 def zip_files():
     name = OUTPUT_SHP[:-4]
@@ -122,7 +121,7 @@ def zip_files():
     for ext in ['.shp', '.shx', '.dbf', '.prj', '.cpg']:
         file_path = f"{OUTPUT_SHP[:-4]}{ext}"
         if not os.path.exists(file_path):
-            print(f"⚠️ Arquivo {file_path} não encontrado para zipar.")
+            print(f"Arquivo {file_path} não encontrado para zipar.")
             return
 
     with zipfile.ZipFile(f"{name}.zip", 'w') as zipf:
